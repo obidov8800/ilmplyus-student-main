@@ -1,0 +1,1182 @@
+.cc-wrapper {
+  min-height: 100vh;
+  background: #f1f5f9;
+  display: flex;
+  justify-content: center;
+  padding: 32px 16px 64px;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.cc-page {
+  background: #fff;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 820px;
+  overflow: hidden;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+/* Header */
+.cc-header {
+  background: linear-gradient(135deg, #0f3460, var(--color-primary));
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.cc-header-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-family: noto-sb, sans-serif;
+  font-size: 15px;
+  min-width: 0;
+}
+
+.cc-header-logo span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cc-header-logo i {
+  font-size: 20px;
+  color: var(--color-accent);
+}
+
+.cc-header-contract {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.cc-contract-number {
+  color: var(--color-accent);
+  font-family: noto-sb, sans-serif;
+  font-size: 14px;
+}
+
+.cc-contract-date {
+  color: #94a3b8;
+  font-size: 13px;
+  font-family: noto-m, sans-serif;
+}
+
+/* Title */
+.cc-title {
+  text-align: center;
+  padding: 28px 32px 8px;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.cc-title h1 {
+  font-family: noto-b, sans-serif;
+  font-size: 20px;
+  color: #0f3460;
+  letter-spacing: 0.5px;
+  margin: 0 0 6px;
+}
+
+.cc-subtitle {
+  font-family: noto-m, sans-serif;
+  font-size: 13px;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Section */
+.cc-section {
+  padding: 20px 32px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.cc-section-title {
+  font-family: noto-sb, sans-serif;
+  font-size: 13px;
+  color: #0f3460;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cc-section-title i {
+  color: var(--color-accent);
+  font-size: 14px;
+}
+
+/* Grid */
+.cc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 24px;
+}
+
+.cc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.cc-field.full {
+  grid-column: 1 / -1;
+}
+
+.cc-label {
+  font-family: noto-m, sans-serif;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.cc-value {
+  font-family: noto-m, sans-serif;
+  font-size: 14px;
+  color: #1e293b;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.cc-price {
+  color: #0f3460;
+  font-family: noto-sb, sans-serif;
+}
+
+.cc-status-label {
+  font-family: noto-m, sans-serif;
+  font-size: 12px;
+  color: #94a3b8;
+  margin: 6px 0 0;
+}
+
+/*
+ * Status kartalar (4-bo'lim) — ikkita tomon (tashkilot + o'quvchi) yonma-yon.
+ * Ilgari bitta, to'liq rangga bo'yalgan (to'q kulrang/yashil, oq matn) karta
+ * edi — endi yengil, oq fonli, faqat chegara va holat matni rangli (referens:
+ * didox.uz'dagi imzo tasdiqlash kartalari — YUBORILGAN/TASDIQLANGAN).
+ */
+.cc-status-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.cc-status-card {
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  font-family: noto-m, sans-serif;
+  background: #fff;
+  border: 1px solid #dfe5ec;
+}
+
+.cc-status-card--sent {
+  border-color: #cbd5e1;
+}
+
+.cc-status-card--sent .cc-status-card-status {
+  color: #64748b;
+}
+
+.cc-status-card--confirmed {
+  background: #f0fdf4;
+  border-color: #86efac;
+}
+
+.cc-status-card--confirmed .cc-status-card-status {
+  color: #16a34a;
+}
+
+.cc-status-card-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #94a3b8;
+  margin-bottom: 10px;
+  font-family: noto-sb, sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.cc-status-card-status {
+  text-align: center;
+  font-family: noto-b, sans-serif;
+  font-size: 18px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.cc-status-card-divider {
+  height: 1px;
+  background: #e2e8f0;
+  margin-bottom: 10px;
+}
+
+.cc-status-card-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  text-align: center;
+  color: #475569;
+}
+
+.cc-status-card-name {
+  font-family: noto-sb, sans-serif;
+  color: #1e293b;
+}
+
+/* Shartnoma matni (7-bo'lim) — huquqiy band, so'zma-so'z */
+.cc-section--legal {
+  background: #fafbfc;
+}
+
+/*
+ * Shartnoma matni — yuklab olinadigan Word/PDF hujjatining o'zi bilan bir
+ * xil shriftda (`Cambria`, standart matn o'lchami 12pt — .docx shablonining
+ * `styles.xml`dagi haqiqiy qiymati) ko'rinishi uchun, ilovaning umumiy
+ * `noto-*` shriftidan atayin farqlanadi. Cambria hamma qurilmada
+ * o'rnatilmagan bo'lishi mumkin (asosan Windows/Office) — shu sabab
+ * o'lchamda yaqin serif zaxiralar bilan birga beriladi.
+ */
+.cc-legal {
+  font-family: Cambria, Georgia, 'Times New Roman', serif;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #1e293b;
+}
+
+.cc-legal-heading {
+  text-align: center;
+  font-family: Cambria, Georgia, 'Times New Roman', serif;
+  font-weight: 700;
+  font-size: 15px;
+  margin: 0 0 4px;
+  color: #0f3460;
+}
+
+.cc-legal-number {
+  text-align: center;
+  font-family: Cambria, Georgia, 'Times New Roman', serif;
+  font-weight: 600;
+  font-size: 13.5px;
+  margin-bottom: 14px;
+}
+
+.cc-legal-meta {
+  display: flex;
+  justify-content: space-between;
+  font-family: Cambria, Georgia, 'Times New Roman', serif;
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.cc-legal p {
+  margin: 0 0 10px;
+  text-align: justify;
+}
+
+.cc-legal-band {
+  margin: 20px 0;
+}
+
+.cc-legal-band-title {
+  font-family: Cambria, Georgia, 'Times New Roman', serif;
+  font-weight: 600;
+  font-size: 13.5px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-bottom: 10px;
+}
+
+/*
+ * Chegarasiz — asl .docx shablonida ham bu ikki jadval chegarasiz
+ * (`w:tblBorders` — barchasi "none"): ular faqat ustunlarni tekislash
+ * uchun ishlatilgan, ko'zga ko'rinadigan panjara sifatida emas.
+ */
+.cc-legal-students-table,
+.cc-legal-signature-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0 14px;
+  font-size: 12.5px;
+}
+
+.cc-legal-students-table th,
+.cc-legal-students-table td,
+.cc-legal-signature-table th,
+.cc-legal-signature-table td {
+  border: none;
+  padding: 6px 10px;
+  vertical-align: top;
+  text-align: left;
+}
+
+.cc-legal-students-table th {
+  font-family: Cambria, Georgia, 'Times New Roman', serif;
+  font-weight: 600;
+  text-align: center;
+}
+
+.cc-legal-td-strong {
+  font-family: Cambria, Georgia, 'Times New Roman', serif;
+  font-weight: 600;
+}
+
+.cc-legal-signature-table th {
+  font-family: Cambria, Georgia, 'Times New Roman', serif;
+  font-weight: 600;
+  text-align: center;
+}
+
+.cc-legal-sig-line {
+  margin-bottom: 4px;
+}
+
+.cc-legal-sig-line:last-child {
+  margin-bottom: 0;
+}
+
+/* Notes */
+.cc-notes {
+  font-family: noto-m, sans-serif;
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.6;
+  margin: 0;
+  padding: 12px 16px;
+  background: #f8faff;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--color-accent);
+}
+
+/* Already done banner */
+.cc-already-done {
+  margin: 20px 32px;
+  padding: 14px 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: noto-m, sans-serif;
+  font-size: 14px;
+}
+
+.cc-already-done.confirmed {
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+.cc-already-done.cancelled {
+  background: #fff1f0;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+/* Footer */
+.cc-footer {
+  padding: 24px 32px 32px;
+  border-top: 2px solid #f1f5f9;
+  background: #f8faff;
+}
+
+/* Checkbox */
+.cc-checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  margin-bottom: 24px;
+  font-family: noto-m, sans-serif;
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.cc-checkbox {
+  display: none;
+}
+
+.cc-checkmark {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #cbd5e1;
+  border-radius: 5px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  margin-top: 1px;
+  position: relative;
+}
+
+.cc-checkbox:checked + .cc-checkmark {
+  background: #0f3460;
+  border-color: #0f3460;
+}
+
+.cc-checkbox:checked + .cc-checkmark::after {
+  content: '';
+  display: block;
+  width: 5px;
+  height: 9px;
+  border: 2px solid #fff;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 1px;
+}
+
+/* Action buttons */
+.cc-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.cc-btn-bekor,
+.cc-btn-tasdiq {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: var(--radius-md);
+  font-family: noto-m, sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.cc-btn-bekor {
+  background: #fff;
+  border: 1.5px solid #e2e8f0;
+  color: #dc2626;
+}
+
+.cc-btn-bekor:hover:not(:disabled) {
+  background: #fff1f0;
+  border-color: #fca5a5;
+}
+
+.cc-btn-bekor:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.cc-btn-tasdiq {
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  color: #fff;
+}
+
+.cc-btn-tasdiq:hover:not(:disabled) {
+  background: linear-gradient(135deg, #15803d, #166534);
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+}
+
+.cc-btn-tasdiq:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Shartnomani (asl Word shablonida) yuklab olish — tasdiqlashdan oldin ham
+   ("diqqat bilan o'qib chiqing" tagida), tasdiqlangandan keyin ham
+   (natija ekranida, o'ziga nusxa saqlab qo'yish uchun) ko'rinadi. */
+.cc-btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: var(--radius-md);
+  font-family: noto-m, sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  border: 1.5px solid var(--color-primary);
+  background: #fff;
+  color: var(--color-primary);
+  transition: all 0.2s ease;
+}
+
+.cc-btn-download:hover:not(:disabled) {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.cc-btn-download:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cc-btn-download--top {
+  margin: 12px auto 0;
+}
+
+.cc-btn-download--bottom {
+  display: flex;
+  margin: 20px auto 0;
+}
+
+/* OTP Modal */
+.cc-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.cc-modal {
+  background: #fff;
+  border-radius: var(--radius-md);
+  padding: 32px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.cc-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.cc-modal-close:hover {
+  background: #f1f5f9;
+  color: #374151;
+}
+
+.cc-modal-icon {
+  width: 60px;
+  height: 60px;
+  background: #eff6ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 24px;
+  color: #0f3460;
+}
+
+.cc-modal-title {
+  font-family: noto-sb, sans-serif;
+  font-size: 18px;
+  color: #1e293b;
+  margin: 0 0 8px;
+}
+
+.cc-modal-desc {
+  font-family: noto-m, sans-serif;
+  font-size: 14px;
+  color: #64748b;
+  margin: 0 0 20px;
+  line-height: 1.5;
+}
+
+.cc-modal-desc span {
+  font-family: noto-sb, sans-serif;
+  color: #0f3460;
+}
+
+/* OTP Input */
+.cc-otp-input {
+  width: 100%;
+  padding: 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  font-size: 24px;
+  text-align: center;
+  letter-spacing: 8px;
+  font-family: noto-b, sans-serif;
+  color: #0f3460;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.cc-otp-input:focus {
+  border-color: #0f3460;
+  box-shadow: 0 0 0 3px rgba(15, 52, 96, 0.1);
+}
+
+.cc-timer {
+  margin: 10px 0 0;
+  font-family: noto-m, sans-serif;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.cc-resend-btn {
+  margin: 10px 0 0;
+  background: none;
+  border: none;
+  color: #0f3460;
+  font-family: noto-m, sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.cc-resend-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cc-modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.cc-btn-cancel {
+  flex: 1;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid #e2e8f0;
+  background: #fff;
+  color: #374151;
+  font-family: noto-m, sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cc-btn-cancel:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.cc-btn-confirm {
+  flex: 1;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  border: none;
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  color: #fff;
+  font-family: noto-m, sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cc-btn-confirm:hover:not(:disabled) {
+  background: linear-gradient(135deg, #15803d, #166534);
+}
+
+.cc-btn-confirm:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cc-btn-danger {
+  flex: 1;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  border: none;
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  color: #fff;
+  font-family: noto-m, sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cc-btn-danger:hover:not(:disabled) {
+  background: linear-gradient(135deg, #b91c1c, #991b1b);
+}
+
+.cc-btn-danger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Loading / Error / Result states */
+.cc-loading,
+.cc-error,
+.cc-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 300px;
+  text-align: center;
+  padding: 32px;
+}
+
+.cc-loading i {
+  font-size: 36px;
+  color: #0f3460;
+}
+
+.cc-loading span {
+  font-family: noto-m, sans-serif;
+  font-size: 16px;
+  color: #64748b;
+}
+
+.cc-error i {
+  font-size: 48px;
+  color: #dc2626;
+}
+
+.cc-error h2 {
+  font-family: noto-sb, sans-serif;
+  font-size: 20px;
+  color: #1e293b;
+  margin: 0;
+}
+
+.cc-error p {
+  font-family: noto-m, sans-serif;
+  font-size: 14px;
+  color: #64748b;
+  margin: 0;
+}
+
+.cc-result i {
+  font-size: 56px;
+}
+
+.cc-result.confirmed i {
+  color: #16a34a;
+}
+
+.cc-result.cancelled i {
+  color: #dc2626;
+}
+
+.cc-result h2 {
+  font-family: noto-sb, sans-serif;
+  font-size: 22px;
+  color: #1e293b;
+  margin: 0;
+}
+
+.cc-result p {
+  font-family: noto-m, sans-serif;
+  font-size: 14px;
+  color: #64748b;
+  margin: 0;
+  max-width: 320px;
+}
+
+.cc-credentials {
+  margin-top: 16px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 10px;
+  padding: 14px 20px;
+  text-align: left;
+  min-width: 260px;
+}
+
+.cc-credentials-title {
+  font-family: noto-m, sans-serif;
+  font-size: 13px;
+  color: #16a34a;
+  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cc-credential-item {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-family: noto-m, sans-serif;
+  font-size: 13px;
+  color: #374151;
+  padding: 4px 0;
+}
+
+.cc-credential-item strong {
+  font-family: noto-sb, sans-serif;
+  color: #0f3460;
+}
+
+/* ── Responsive ── */
+
+/* Tablet (≤768px) */
+@media (max-width: 768px) {
+  .cc-wrapper {
+    padding: 24px 16px 48px;
+  }
+
+  .cc-page {
+    max-width: 100%;
+  }
+
+  .cc-header {
+    padding: 18px 24px;
+    gap: 12px;
+  }
+
+  .cc-header-logo {
+    font-size: 14px;
+  }
+
+  .cc-title {
+    padding: 20px 24px 12px;
+  }
+
+  .cc-title h1 {
+    font-size: 18px;
+  }
+
+  .cc-section {
+    padding: 18px 24px;
+  }
+
+  .cc-already-done {
+    margin: 16px 24px;
+  }
+
+  .cc-footer {
+    padding: 20px 24px 28px;
+  }
+}
+
+/* Large mobile (≤600px) */
+@media (max-width: 600px) {
+  .cc-wrapper {
+    padding: 0 0 48px;
+    background: #fff;
+    align-items: flex-start;
+  }
+
+  .cc-page {
+    border-radius: 0;
+    box-shadow: none;
+    width: 100%;
+  }
+
+  .cc-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 20px;
+    gap: 10px;
+  }
+
+  .cc-header-logo {
+    font-size: 13px;
+    max-width: 100%;
+  }
+
+  .cc-header-logo i {
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .cc-header-contract {
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .cc-title {
+    padding: 16px 20px 10px;
+  }
+
+  .cc-title h1 {
+    font-size: 15px;
+    letter-spacing: 0;
+  }
+
+  .cc-subtitle {
+    font-size: 12px;
+  }
+
+  .cc-section {
+    padding: 14px 20px;
+  }
+
+  .cc-section-title {
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+
+  .cc-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .cc-label {
+    font-size: 11px;
+  }
+
+  .cc-value {
+    font-size: 13px;
+  }
+
+  .cc-notes {
+    font-size: 13px;
+  }
+
+  .cc-legal {
+    font-size: 12px;
+  }
+
+  .cc-legal-students-table,
+  .cc-legal-signature-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .cc-status-row {
+    grid-template-columns: 1fr;
+  }
+
+  .cc-status-card {
+    padding: 14px 18px;
+  }
+
+  .cc-status-card-status {
+    font-size: 17px;
+    letter-spacing: 2px;
+  }
+
+  .cc-already-done {
+    margin: 14px 20px;
+    padding: 12px 16px;
+    font-size: 13px;
+    align-items: flex-start;
+  }
+
+  .cc-footer {
+    padding: 18px 20px 32px;
+  }
+
+  .cc-checkbox-label {
+    font-size: 13px;
+    margin-bottom: 18px;
+    gap: 10px;
+  }
+
+  .cc-actions {
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
+
+  .cc-btn-bekor,
+  .cc-btn-tasdiq {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 20px;
+    font-size: 15px;
+    border-radius: var(--radius-md);
+    box-sizing: border-box;
+  }
+
+  /* Loading / Error / Result */
+  .cc-loading,
+  .cc-error,
+  .cc-result {
+    padding: 48px 20px;
+    min-height: 70vh;
+    box-sizing: border-box;
+  }
+
+  .cc-result i {
+    font-size: 48px;
+  }
+
+  .cc-result h2 {
+    font-size: 18px;
+  }
+
+  .cc-result p {
+    max-width: 100%;
+  }
+
+  .cc-credentials {
+    min-width: unset;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Modal — slides up from bottom */
+  .cc-modal-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .cc-modal {
+    padding: 24px 20px 32px;
+    border-radius: 20px 20px 0 0;
+    max-height: 90vh;
+    overflow-y: auto;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .cc-modal-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+
+  .cc-modal-title {
+    font-size: 16px;
+  }
+
+  .cc-modal-desc {
+    font-size: 13px;
+  }
+
+  .cc-otp-input {
+    font-size: 22px;
+    letter-spacing: 6px;
+    padding: 14px;
+  }
+
+  .cc-modal-actions {
+    flex-direction: column-reverse;
+    gap: 8px;
+  }
+
+  .cc-btn-cancel,
+  .cc-btn-confirm,
+  .cc-btn-danger {
+    width: 100%;
+    padding: 14px;
+    font-size: 15px;
+    border-radius: var(--radius-md);
+    box-sizing: border-box;
+  }
+}
+
+/* Small mobile (≤480px) */
+@media (max-width: 480px) {
+  .cc-header {
+    padding: 14px 16px;
+  }
+
+  .cc-header-logo span {
+    max-width: 200px;
+  }
+
+  .cc-title {
+    padding: 14px 16px 8px;
+  }
+
+  .cc-title h1 {
+    font-size: 14px;
+  }
+
+  .cc-section {
+    padding: 12px 16px;
+  }
+
+  .cc-section-title {
+    font-size: 11px;
+  }
+
+  .cc-already-done {
+    margin: 12px 16px;
+    padding: 10px 14px;
+    font-size: 12px;
+    gap: 8px;
+  }
+
+  .cc-footer {
+    padding: 16px 16px 28px;
+  }
+
+  .cc-otp-input {
+    font-size: 18px;
+    letter-spacing: 4px;
+  }
+
+  .cc-modal {
+    padding: 20px 16px 28px;
+  }
+}
+
+/* Very small (≤360px) */
+@media (max-width: 360px) {
+  .cc-header-logo span {
+    max-width: 150px;
+    font-size: 12px;
+  }
+
+  .cc-header-logo i {
+    font-size: 16px;
+  }
+
+  .cc-contract-number {
+    font-size: 12px;
+  }
+
+  .cc-contract-date {
+    font-size: 11px;
+  }
+
+  .cc-title h1 {
+    font-size: 13px;
+  }
+
+  .cc-subtitle {
+    font-size: 11px;
+  }
+
+  .cc-value {
+    font-size: 12px;
+  }
+
+  .cc-label {
+    font-size: 10px;
+  }
+
+  .cc-btn-bekor,
+  .cc-btn-tasdiq {
+    font-size: 14px;
+    padding: 13px 16px;
+  }
+
+  .cc-otp-input {
+    font-size: 16px;
+    letter-spacing: 3px;
+    padding: 12px;
+  }
+
+  .cc-modal {
+    padding: 18px 14px 24px;
+  }
+
+  .cc-modal-title {
+    font-size: 15px;
+  }
+
+  .cc-checkbox-label {
+    font-size: 12px;
+  }
+}

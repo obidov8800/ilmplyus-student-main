@@ -1,0 +1,786 @@
+:root {
+  --primary-color: #fe9100;
+  --present-color: #1bb200;
+  --absent-color: #e70a0a;
+  --late-color: #f1c40f;
+  --reason-color: #3f88c9;
+  --border-color: #e2e8f0;
+  --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.sa-page {
+  width: 100%;
+  margin-top: 50px !important;
+  margin-left: 140px !important;
+}
+
+/* ===== HEADER ===== */
+.sa-header {
+  background: var(--primary-color);
+  border-radius: 16px 16px 0 0;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.sa-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.year-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  padding: 6px 12px;
+  border-radius: 50px;
+  box-shadow: var(--card-shadow);
+  flex-shrink: 0;
+}
+
+.year-btn {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.year-display {
+  font-weight: 600;
+  font-size: 16px;
+  min-width: 48px;
+  text-align: center;
+}
+
+.month-pills {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.month-pill {
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.month-pill:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.month-pill.active {
+  background: white;
+  color: var(--primary-color);
+  border-color: white;
+  font-weight: 700;
+}
+
+/* ===== LEGEND ===== */
+.sa-legend {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: white;
+  font-weight: 600;
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dot-present {
+  background: var(--present-color);
+}
+.dot-absent {
+  background: var(--absent-color);
+}
+.dot-late {
+  background: var(--late-color);
+}
+.dot-reason {
+  background: var(--reason-color);
+}
+.dot-empty {
+  background: #d0d0d0;
+}
+
+/* ===== GROUP BAR ===== */
+.sa-group-bar {
+  background: white;
+  border-left: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.sa-group-label {
+  font-weight: 700;
+  font-size: 14px;
+  color: #555;
+  flex-shrink: 0;
+}
+
+.sa-group-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sa-group-pill {
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border-color);
+  background: #f8f9fa;
+  color: #444;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.sa-group-pill:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.sa-group-pill.active {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+  font-weight: 700;
+}
+
+/* ===== STATS ===== */
+.sa-stats {
+  display: flex;
+  gap: 12px;
+  padding: 16px 24px;
+  background: #fafafa;
+  border-left: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  flex-wrap: wrap;
+}
+
+.sa-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  border-radius: 10px;
+  padding: 10px 20px;
+  border: 1.5px solid var(--border-color);
+  min-width: 80px;
+  box-shadow: var(--card-shadow);
+}
+
+.sa-stat-num {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.sa-stat-lbl {
+  font-size: 11px;
+  color: #888;
+  margin-top: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.sa-stat-present .sa-stat-num {
+  color: var(--present-color);
+}
+.sa-stat-absent .sa-stat-num {
+  color: var(--absent-color);
+}
+.sa-stat-late .sa-stat-num {
+  color: var(--late-color);
+}
+.sa-stat-reason .sa-stat-num {
+  color: var(--reason-color);
+}
+.sa-stat-score .sa-stat-num {
+  color: var(--primary-color);
+}
+
+/* ===== DESKTOP TABLE ===== */
+.desktop-table-container {
+  background: white;
+  border-radius: 0 0 12px 12px;
+  border: 1px solid var(--border-color);
+  overflow-x: auto;
+  box-shadow: var(--card-shadow);
+}
+
+.attendance-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  display: table;
+}
+
+.attendance-table thead {
+  display: table-header-group;
+}
+.attendance-table tbody {
+  display: table-row-group;
+}
+.attendance-table thead tr,
+.attendance-table tbody tr {
+  display: table-row;
+}
+.attendance-table thead tr {
+  background: #fff;
+}
+
+.student-col-header {
+  display: table-cell;
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 14px;
+  min-width: 220px;
+  border-bottom: 2px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.attendance-col-header {
+  display: table-cell;
+  padding: 8px 4px;
+  text-align: center;
+  border-bottom: 2px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10;
+  min-width: 44px;
+  vertical-align: middle;
+}
+
+.weekday-header {
+  color: #003366;
+  font-weight: 700;
+  font-size: 11px;
+  text-align: center;
+  display: block;
+}
+
+.date-header {
+  font-weight: 600;
+  font-size: 13px;
+  text-align: center;
+  display: block;
+}
+
+.attendance-table tbody tr {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.student-info-cell {
+  display: table-cell;
+  padding: 14px 16px;
+  min-width: 220px;
+  vertical-align: middle;
+}
+
+.student-info-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.student-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.student-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.student-name {
+  font-weight: 600;
+  font-size: 15px;
+  color: #1a202c;
+  white-space: nowrap;
+}
+
+.student-phone {
+  font-size: 12px;
+  color: #666;
+}
+
+/* Aktiv / Noaktiv badge */
+.sa-status-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.sa-badge-aktiv   { background: #228be6; color: #fff; }
+.sa-badge-noaktiv { background: #adb5bd; color: #fff; }
+
+.attendance-cell {
+  display: table-cell;
+  padding: 8px 4px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* ===== ATTENDANCE DOT ===== */
+.attendance-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  font-weight: bold;
+  font-size: 13px;
+  color: white;
+  flex-shrink: 0;
+}
+
+.attendance-dot.dot-late {
+  color: #000;
+}
+
+.grade-value {
+  font-weight: 700;
+  font-size: 13px;
+}
+
+/* ===== EMPTY STATE ===== */
+.sa-empty-state {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  padding: 60px 20px;
+  text-align: center;
+  color: #999;
+  font-size: 15px;
+}
+
+.sa-empty-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+/* ===== BALANCE COLUMN (desktop) ===== */
+.sa-balance-header {
+  display: table-cell;
+  padding: 8px 14px;
+  text-align: right;
+  border-bottom: 2px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10;
+  white-space: nowrap;
+  font-size: 11px;
+  font-family: noto-b, sans-serif;
+  color: #999;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  vertical-align: middle;
+  min-width: 130px;
+}
+
+.sa-balance-cell {
+  display: table-cell;
+  padding: 10px 14px;
+  text-align: right;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.sa-balance-id {
+  font-size: 12px;
+  font-weight: 700;
+  color: #003366;
+}
+
+.sa-balance-date {
+  font-size: 11px;
+  color: #888;
+  margin: 2px 0;
+}
+
+.sa-balance-val {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.sa-balance-pos { color: var(--present-color); }
+.sa-balance-neg { color: var(--absent-color); }
+
+/* ===== MOBILE ELEMENTS (hidden on desktop) ===== */
+.sa-mobile-header {
+  display: none;
+}
+.sa-mobile-card {
+  display: none;
+}
+
+/* ===== OLD MOBILE LIST (hidden always — replaced by sa-mobile-card) ===== */
+.sa-mobile-list {
+  display: none !important;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .sa-page {
+    margin-top: 20px !important;
+    margin-left: 0 !important;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Hide desktop elements */
+  .sa-header {
+    display: none;
+  }
+  .sa-stats {
+    display: none;
+  }
+  .desktop-table-container {
+    display: none;
+  }
+
+  /* ── Mobile month navigation ── */
+  .sa-mobile-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .sa-mobile-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border-radius: 14px;
+    padding: 12px 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  .sa-nav-arrow {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .sa-nav-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a202c;
+    letter-spacing: 0.5px;
+  }
+
+  .sa-mobile-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    padding: 10px 14px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .sa-mobile-legend .legend-item {
+    color: #444;
+    font-size: 12px;
+    font-weight: 600;
+    gap: 4px;
+  }
+
+  .sa-mobile-legend .legend-dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  /* ── Group bar compact ── */
+  .sa-group-bar {
+    padding: 10px 12px;
+    gap: 8px;
+    border-left: none;
+    border-right: none;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .sa-group-label {
+    font-size: 13px;
+  }
+  .sa-group-pills {
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .sa-group-pill {
+    padding: 5px 12px;
+    font-size: 12px;
+    border-radius: 16px;
+  }
+
+  /* Empty state tweaks */
+  .sa-empty-state {
+    border: none;
+    border-radius: 12px;
+    padding: 40px 16px;
+    font-size: 13px;
+  }
+
+  /* ── Mobile card ── */
+  .sa-mobile-card {
+    display: block;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Orange student section */
+  .sa-mobile-student {
+    background: var(--primary-color);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .sa-mobile-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .sa-mobile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .sa-mobile-avatar svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .sa-mobile-sinfo {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .sa-mobile-sname {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.35;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sa-mobile-sphone {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.85);
+    margin-top: 2px;
+  }
+
+  .sa-mobile-sbadge {
+    background: #228be6;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  /* Horizontal attendance grid */
+  .sa-mobile-grid {
+    background: #fff;
+    display: flex;
+    overflow-x: auto;
+    padding: 14px 12px;
+    gap: 6px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .sa-mobile-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sa-grid-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    min-width: 38px;
+    flex-shrink: 0;
+  }
+
+  .sa-grid-wd {
+    font-size: 10px;
+    font-weight: 700;
+    color: #003366;
+    text-transform: uppercase;
+  }
+
+  .sa-grid-day {
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+  }
+
+  .sa-mobile-grid .attendance-dot {
+    width: 30px;
+    height: 30px;
+    font-size: 11px;
+  }
+
+  .sa-mobile-empty {
+    padding: 20px;
+    color: #aaa;
+    font-size: 13px;
+    text-align: center;
+    width: 100%;
+  }
+
+  /* Mobile balance footer */
+  .sa-mobile-balance {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fafafa;
+    border-top: 1px solid #f0f0f0;
+    padding: 10px 14px;
+    gap: 8px;
+  }
+
+  .sa-mobile-balance-id {
+    font-size: 11px;
+    color: #999;
+    font-weight: 600;
+  }
+
+  .sa-mobile-balance-val {
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .sa-mobile-nav {
+    padding: 10px 12px;
+  }
+  .sa-nav-arrow {
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+  }
+  .sa-nav-title {
+    font-size: 14px;
+  }
+
+  .sa-mobile-student {
+    padding: 12px 12px;
+    gap: 10px;
+  }
+  .sa-mobile-avatar {
+    width: 40px;
+    height: 40px;
+  }
+  .sa-mobile-sname {
+    font-size: 12px;
+  }
+
+  .sa-mobile-grid {
+    padding: 10px 8px;
+    gap: 4px;
+  }
+  .sa-grid-col {
+    min-width: 34px;
+  }
+  .sa-mobile-grid .attendance-dot {
+    width: 26px;
+    height: 26px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .sa-nav-title { font-size: 13px; }
+  .sa-mobile-legend .legend-item { font-size: 11px; }
+  .sa-grid-col { min-width: 30px; }
+  .sa-mobile-grid .attendance-dot { width: 24px; height: 24px; }
+}

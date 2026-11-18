@@ -1,0 +1,114 @@
+/*
+ * Ekran pastidagi navigatsiya paneli — faqat ≤768px (ilovaning boshqa barcha
+ * mobil o'tishlari ham shu nuqtada, `index.css`ga qarang). Desktopda
+ * ko'rinmaydi.
+ *
+ * Dizayn: SUZUVCHI panel — ekran chetlaridan uzilib, katta radius + kuchli
+ * soya bilan "suzib" turadi (admin/user ilovasidagi bilan bir xil naqsh).
+ * Faol bo'lim: to'q ko'k to'ldirilgan yumaloq kvadrat + oq ikonka, ostida
+ * ko'k qalin yozuv. Nofaol: kulrang.
+ */
+.mobile-tabbar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-tabbar {
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    z-index: 998;
+    display: flex;
+    align-items: stretch;
+    gap: 2px;
+    background: var(--color-surface, #fff);
+    border: 1px solid rgba(3, 20, 40, 0.05);
+    border-radius: 22px;
+    box-shadow:
+      0 4px 12px rgba(3, 20, 40, 0.08),
+      0 14px 34px rgba(3, 20, 40, 0.14);
+    padding: 7px 8px;
+  }
+
+  .mobile-tabbar__item {
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 2px 0;
+    border: none;
+    background: transparent;
+    color: #9aa4b2;
+    font-family: noto-m, sans-serif;
+    font-size: 10px;
+    line-height: 1.1;
+    letter-spacing: -0.2px;
+    text-decoration: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Ikonka "hab"i — faol holatda to'q ko'k to'ldirilgan kvadrat */
+  .mobile-tabbar__item i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 30px;
+    border-radius: 12px;
+    font-size: 17px;
+    color: inherit;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      transform 0.18s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .mobile-tabbar__item span {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+  }
+
+  /* ── Faol bo'lim ──────────────────────────────────────────────────── */
+  .mobile-tabbar__item.is-active {
+    color: var(--color-primary, #003366);
+    font-family: noto-b, sans-serif;
+  }
+
+  .mobile-tabbar__item.is-active i {
+    background: var(--color-primary, #003366);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 12px rgba(0, 51, 102, 0.3);
+  }
+
+  /* Bosishda yengil "cho'kish" */
+  .mobile-tabbar__item:active i {
+    transform: scale(0.9);
+  }
+}
+
+/* Juda tor telefonda panel ichini biroz ixchamlashtiramiz */
+@media (max-width: 360px) {
+  .mobile-tabbar {
+    left: 8px;
+    right: 8px;
+    padding: 6px 5px;
+  }
+  .mobile-tabbar__item i {
+    width: 40px;
+    font-size: 16px;
+  }
+  .mobile-tabbar__item {
+    font-size: 9.5px;
+  }
+}

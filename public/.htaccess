@@ -1,0 +1,162 @@
+# To'g'ri MIME turlari.
+#
+# Ba'zi Apache sozlamalarida `.js`/`.mjs` uchun aniq MIME turi ro'yxatga
+# olinmagan bo'ladi va noma'lum kengaytmalar standart (odatda text/html)
+# tur bilan beriladi — brauzer esa modul skriptlar uchun MIME turini
+# qat'iy tekshiradi ("Expected a JavaScript module but server responded
+# with a MIME type of text/html" xatosi shundan kelib chiqishi mumkin,
+# hatto fayl mavjud va to'g'ri bo'lsa ham).
+<IfModule mod_mime.c>
+  AddType application/javascript .js .mjs
+  AddType text/css .css
+  AddType application/json .json
+  AddType image/svg+xml .svg
+  AddType font/woff2 .woff2
+  AddType font/woff .woff
+  AddType font/ttf .ttf
+</IfModule>
+
+# SPA fallback.
+#
+# Bu React Router bilan client-side marshrutlaydigan ilova — `/contract/xxx`
+# kabi manzillar serverda haqiqiy fayl/papka emas, faqat brauzerdagi
+# JavaScript shularni tushunadi. Shu qoida bo'lmasa, ularga to'g'ridan-
+# to'g'ri kirilganda (masalan SMS'dagi shartnoma havolasi) yoki sahifa
+# yangilanganda Apache oddiy 404 qaytaradi.
+#
+# Aka-uka loyihada (`ilmplyus-main`) `RewriteCond %{REQUEST_FILENAME}
+# !-f` naqshi ishlab turgan serverda `assets/`dagi HAQIQIY fayllarni ham
+# "yo'q" deb hisoblab, ularni ham `index.html`ga yo'naltirib
+# yuborayotgani aniqlangan edi (curl -I bilan tasdiqlangan: haqiqiy JS
+# fayli so'ralganda javob `index.html`ning aynan o'zi, hajmi
+# bayt-baytigacha bir xil edi). Bu sahifa — haqiqiy shartnoma
+# tasdiqlash havolasi (`my.ilmplyus.uz`) — ishlab turishi ayniqsa
+# muhim, shu sabab shu tajriba asosida bu yerda ham oldindan ehtiyot
+# chorasi ko'rilgan: `-f` tekshiruviga tayanish o'rniga `assets/` yo'li
+# ANIQ nomlab chetlab o'tiladi.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # ── Backend proxy (teskari proksi) ──
+  #
+  # `/api/...` va `/storage/...` so'rovlari brauzerdan SHU domenga keladi,
+  # Apache esa ularni SERVER TOMONIDAN backendga uzatadi. Natijada:
+  #   • DevTools > Network da faqat shu saytning domeni ko'rinadi
+  #     (masalan `staff.ilmplyus.uz/api/...`), backend manzili emas;
+  #   • CORS umuman ishga tushmaydi — so'rov bir xil origin ichida qoladi.
+  # Frontend kodi doim NISBIY `/api` ga murojaat qiladi (`src/api/baseUrl.ts`).
+  #
+  # BACKEND MANZILI bu faylda QO'LDA YOZILMAYDI: quyidagi qoidalarda manzil o'rniga
+  # o'rin belgisi (ikki pastki chiziq + BACKEND_URL + ikki pastki chiziq) turadi.
+  # `npm run build` uni `D:\ilmplyus\backend.env` dagi BACKEND_URL bilan almashtiradi
+  # (tayyor `dist/.htaccess` haqiqiy manzil bilan chiqadi). Backendni almashtirish
+  # uchun faqat `backend.env`ni o'zgartiring — bu shablonga TEGMANG.
+  #
+  # DIQQAT — server talablari:
+  #   • `mod_proxy` va `mod_proxy_http` yoqilgan bo'lishi kerak;
+  #   • HTTPS maqsad uchun `SSLProxyEngine On` kerak, uni FAQAT vhost/server
+  #     sozlamasida berish mumkin (`.htaccess`da emas). Agar hosting buni
+  #     bermasa, quyidagini vhost'ga qo'ying (yoki nginx variantini):
+  #
+  #       SSLProxyEngine On
+  #       ProxyPass        /api     __BACKEND_URL__/api
+  #       ProxyPassReverse /api     __BACKEND_URL__/api
+  #       ProxyPass        /storage __BACKEND_URL__/storage
+  #       ProxyPassReverse /storage __BACKEND_URL__/storage
+  #
+  #     nginx uchun:
+  #       location /api/     { proxy_pass __BACKEND_URL__/api/; }
+  #       location /storage/ { proxy_pass __BACKEND_URL__/storage/; }
+  #
+  # `[P]` — proksi, `[L]` — oxirgi qoida (pastdagi SPA fallback'ga tushmasin),
+  # `[QSA]` — so'rov satri (?page=2 kabi) saqlanadi.
+  RewriteRule ^api/(.*)$ __BACKEND_URL__/api/$1 [P,L,QSA]
+  RewriteRule ^storage/(.*)$ __BACKEND_URL__/storage/$1 [P,L,QSA]
+
+  # `assets/` ostidagi hamma narsa — hech qachon index.html'ga emas. Bir
+  # yo'la so'rovga bayroq ham qo'yiladi (`env=LONG_CACHE`) — pastdagi
+  # `mod_headers` bo'limi shuni o'qib, faqat SHU yo'ldagi (xeshlangan
+  # nomli) fayllarga uzoq muddatli keshlash header'ini qo'shadi.
+  # `<FilesMatch>` bu yerda ishlamas edi — u fayl NOMIga (masalan
+  # `foo.js`), yo'l PREFIKSIGA emas qarайdi, shu sabab `^assets/` hech
+  # qachon mos kelmasdi.
+  RewriteRule ^assets/ - [E=LONG_CACHE:1,L]
+
+  # Boshqa haqiqiy statik fayllar (favicon, robots.txt va h.k.)
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^ - [L]
+
+  # Qolgani (SPA marshrutlari) index.html'ga
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Siqib (gzip) yuborish — matn asosidagi fayllar (JS/CSS/HTML/SVG) tarmoq
+# orqali kichikroq hajmda ketadi, ayniqsa sekin internetda sahifa tezroq
+# ochiladi. `.ttf` (bu loyihada NotoSansJP shriftlari uchun ishlatilgan,
+# siqilmagan format) ham shu ro'yxatda — sezilarli kichraytiradi (ular
+# BIR NECHA MEGABAYT bo'lgani sabab ayniqsa muhim). `.docx` ATAYLAB YO'Q
+# — u o'z formati ichida allaqachon siqilgan (ZIP asosida), qayta
+# siqishga urinish faqat protsessor vaqtini yeydi, hajmni deyarli
+# kamaytirmaydi.
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE application/xml application/rss+xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+  AddOutputFilterByType DEFLATE font/ttf application/font-sfnt
+</IfModule>
+
+# Keshlash muddatlari.
+#
+# `assets/` ostidagi HAR BIR fayl nomida Vite qo'ygan tarkib xeshi bor
+# (masalan `vendor-react-Dp_XydkJ.js`) — fayl mazmuni o'zgarsa, nomi ham
+# o'zgaradi. Shu sabab bu fayllarni "abadiy" (1 yil, `immutable`) keshlash
+# XAVFSIZ: eski nusxa hech qachon yangi qurilishdagi (deploy) fayl bilan
+# aralashib qolmaydi — yangi build butunlay YANGI nomlar chiqaradi. Qaysi
+# so'rov shu qoidaga tushishi yuqoridagi `mod_rewrite` bo'limida `env=`
+# bayrog'i orqali ANIQ yo'l (assets/) bo'yicha belgilanadi — MIME turi
+# bo'yicha emas, aks holda `assets/` TASHQARISIDAGI (masalan `public/`dan
+# to'g'ridan-to'g'ri nusxalangan, xeshlanmagan) xuddi shunday kengaytmali
+# fayl ham xato ravishda "abadiy" keshlanib qolishi mumkin edi.
+#
+# `index.html` esa ALOHIDA — u hech qachon keshlanmasligi kerak, chunki
+# aynan shu fayl HOZIRGI qurilishdagi assets/ nomlariga ishora qiladi;
+# u keshlansa, foydalanuvchi yangi deploydan keyin ham eski (endi
+# noto'g'ri nomlangan fayllarga ishora qiluvchi) sahifani ko'raveradi.
+# Ikkita mustaqil mexanizm bilan (mod_expires + mod_headers) — birortasi
+# serverda o'chirilgan/mavjud bo'lmasa ham, ikkinchisi baribir ishlaydi.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set Cache-Control "public, max-age=31536000, immutable" env=LONG_CACHE
+
+  <Files "index.html">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+  </Files>
+</IfModule>
+
+# >>> xato-sahifalari
+# Apache O'ZI xato qaytarganda (ruxsat yo'q, ichki xato, server band va h.k.) standart oq sahifa o'rniga saytning
+# o'z sahifasi chiqadi. `errors/*.html` — mustaqil HTML (React/assets'ga bog'liq emas), tilni brauzerdan oladi.
+# Backend (Laravel `/api`) xatolari bunga TUSHMAYDI — proksi ularni JSON ko'rinishida o'zgarishsiz o'tkazadi.
+# Fayllar manbasi: `D:\ilmplyus\_shared\error-pages\build.mjs` (uchala ilovaning `public/` papkasiga yozadi).
+ErrorDocument 403 /errors/403.html
+ErrorDocument 404 /errors/404.html
+ErrorDocument 500 /errors/500.html
+ErrorDocument 501 /errors/501.html
+ErrorDocument 502 /errors/502.html
+ErrorDocument 503 /errors/503.html
+ErrorDocument 504 /errors/504.html
+
+# `sw.js` (service worker — internet yo'qligida offline.html ni ko'rsatadi) va offline.html hech qachon keshlanmasin:
+# yangilanishi darhol ko'rinsin.
+<IfModule mod_headers.c>
+  <FilesMatch "^(sw\.js|offline\.html)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+  </FilesMatch>
+</IfModule>
+# <<< xato-sahifalari
